@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: satu kolom baca dengan tabel lebar di atas, lalu dua blok penjelasan untuk orang awam. */
+:root {
+  --bg: #e4e9ec;
+  --surface: #eef2f4;
+  --ink: #1f2a33;
+  --muted: #5a6875;
+  --line: #d9e0e6;
+  --accent: #1f6f8b;
+  --accent-soft: #e3f0f4;
+  --team: #2e7d5b;
+  --team-soft: #e4f3ec;
+  --warn-soft: #fbf1e3;
+  --warn: #8a5a12;
+  --font-display: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171c;
+    --surface: #182128;
+    --ink: #e6edf2;
+    --muted: #9fb0bd;
+    --line: #2a3640;
+    --accent: #6cbad6;
+    --accent-soft: #1b3440;
+    --team: #6fcf9f;
+    --team-soft: #17332a;
+    --warn-soft: #33281a;
+    --warn: #e7b866;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171c;
+  --surface: #182128;
+  --ink: #e6edf2;
+  --muted: #9fb0bd;
+  --line: #2a3640;
+  --accent: #6cbad6;
+  --accent-soft: #1b3440;
+  --team: #6fcf9f;
+  --team-soft: #17332a;
+  --warn-soft: #33281a;
+  --warn: #e7b866;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.prose { max-width: 68ch; }
+
+header.top {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+header.top .wrap { padding-top: 40px; padding-bottom: 32px; display: grid; gap: 10px; }
+.eyebrow { font-family: var(--font-display); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; }
+h2 { font-size: clamp(24px, 3vw, 30px); font-weight: 800; }
+h3 { font-size: 19px; font-weight: 700; }
+.lead { font-size: 19px; color: var(--muted); margin: 0; }
+
+main { display: grid; gap: 64px; padding: 48px 0 72px; }
+section { display: grid; gap: 20px; }
+.section-head { display: grid; gap: 8px; }
+.section-head p { margin: 0; color: var(--muted); }
+
+/* Tabel paket */
+.table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 860px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--line); font-size: 15.5px; }
+thead th { font-family: var(--font-display); font-size: 13px; font-weight: 700; letter-spacing: .03em; color: var(--muted); background: var(--bg); position: sticky; top: 0; }
+tbody tr:last-child td { border-bottom: 0; }
+td.plan { font-family: var(--font-display); font-weight: 800; font-size: 17px; white-space: nowrap; }
+.chip { display: inline-block; font-size: 12.5px; font-weight: 700; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.chip.ind { background: var(--accent-soft); color: var(--accent); }
+.chip.team { background: var(--team-soft); color: var(--team); }
+.chip.ent { background: var(--warn-soft); color: var(--warn); }
+.sub { display: block; color: var(--muted); font-size: 14px; }
+tr.group-start td { border-top: 2px solid var(--line); }
+.notes { display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+.notes p { margin: 0; }
+
+/* Perbandingan individual vs team */
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 12px; align-content: start; }
+.card.team { border-top: 4px solid var(--team); }
+.card.ind { border-top: 4px solid var(--accent); }
+.card ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.card p { margin: 0; }
+.analogy { background: var(--accent-soft); border-radius: 12px; padding: 18px 22px; }
+.analogy p { margin: 0; }
+
+.story { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.story ol { margin: 0; padding-left: 22px; display: grid; gap: 8px; }
+.verdict { font-weight: 700; }
+.card.ind .verdict { color: var(--warn); }
+.card.team .verdict { color: var(--team); }
+
+#paket{
+  margin-top: 0;
+}
+/* Alasan memilih Team */
+.reasons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: r; }
+.reason { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 8px; align-content: start; }
+.reason h3::before { counter-increment: r; content: counter(r) ". "; color: var(--team); }
+.reason p { margin: 0; color: var(--ink); }
+.price-compare table { min-width: 620px; }
+.bi-table table { min-width: 560px; }
+.help { color: var(--team); }
+.bi-table td.plan { white-space: normal; min-width: 170px; }
+.when { background: var(--warn-soft); border-radius: 12px; padding: 18px 22px; display: grid; gap: 8px; }
+.when ul { margin: 0; padding-left: 20px; }
+.when h3 { color: var(--warn); }
+
+footer { border-top: 1px solid var(--line); background: var(--surface); }
+footer .wrap { padding-top: 24px; padding-bottom: 32px; font-size: 14.5px; color: var(--muted); display: grid; gap: 8px; }
+footer ul { margin: 0; padding-left: 20px; }
+
+@media (max-width: 860px) {
+  .reasons { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .compare, .story, .reasons { grid-template-columns: 1fr; }
+  body { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+
+<main class="wrap">
+
+  <section id="paket" aria-labelledby="h-paket">
+    <div class="section-head">
+      <h2 id="h-paket">Gambaran paket</h2>
+      <p class="prose">Tiga paket untuk perorangan, dua jenis kursi Team, dan Enterprise untuk organisasi besar.</p>
+    </div>
+
+    <div class="table-scroll" role="region" aria-label="Tabel gambaran paket" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Paket</th>
+            <th scope="col">Jenis</th>
+            <th scope="col">Harga (USD)</th>
+            <th scope="col">Perkiraan harga (Rp)</th>
+            <th scope="col">Kapasitas pemakaian</th>
+            <th scope="col">Kredit API</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="plan">Pro</td>
+            <td><span class="chip ind">Individual</span></td>
+            <td>$20/bulan<span class="sub">atau $17/bulan jika bayar tahunan ($200 di muka)</span></td>
+            <td>±Rp364 ribu/bulan<span class="sub">atau ±Rp310 ribu/bulan (tahunan)</span></td>
+            <td>Dasar: minimal 5x paket Free per sesi 5 jam</td>
+            <td>Tidak ada</td>
+          </tr>
+          <tr>
+            <td class="plan">Max</td>
+            <td><span class="chip ind">Individual</span></td>
+            <td>$100/bulan<span class="sub">hanya bayar bulanan</span></td>
+            <td>±Rp1,82 juta/bulan</td>
+            <td>5x Pro, per 5 jam dan per minggu</td>
+            <td>$100/bulan</td>
+          </tr>
+          <tr>
+            <td class="plan">Ultra</td>
+            <td><span class="chip ind">Individual</span></td>
+            <td>$200/bulan<span class="sub">hanya bayar bulanan</span></td>
+            <td>±Rp3,64 juta/bulan</td>
+            <td>10x Pro per minggu; tanpa batas 5 jam untuk akun terverifikasi</td>
+            <td>$200/bulan</td>
+          </tr>
+          <tr class="group-start">
+            <td class="plan">Team Standard</td>
+            <td><span class="chip team">Team</span><span class="sub">2–150 kursi</span></td>
+            <td>$25/kursi/bulan<span class="sub">atau $20 jika bayar tahunan</span></td>
+            <td>±Rp455 ribu/kursi/bulan<span class="sub">atau ±Rp364 ribu (tahunan)</span></td>
+            <td>1,25x Pro per sesi + batas mingguan, per orang</td>
+            <td>Hingga $500/bulan, dipakai bersama</td>
+          </tr>
+          <tr>
+            <td class="plan">Team Premium</td>
+            <td><span class="chip team">Team</span><span class="sub">bisa dicampur dengan Standard</span></td>
+            <td>$125/kursi/bulan<span class="sub">atau $100 jika bayar tahunan</span></td>
+            <td>±Rp2,28 juta/kursi/bulan<span class="sub">atau ±Rp1,82 juta (tahunan)</span></td>
+            <td>6,25x Pro (5x kursi Standard), per orang</td>
+            <td>Ikut kredit bersama Team</td>
+          </tr>
+          <tr class="group-start">
+            <td class="plan">Enterprise</td>
+            <td><span class="chip ent">Enterprise</span><span class="sub">minimal 20 kursi</span></td>
+            <td>$20/kursi/bulan + biaya pemakaian<span class="sub">hanya bayar tahunan</span></td>
+            <td>±Rp364 ribu/kursi/bulan<span class="sub">+ biaya pemakaian</span></td>
+            <td>Tidak ada jatah tetap; bayar sesuai pemakaian, dengan batas belanja dari admin</td>
+            <td>Pemakaian ditagih sesuai tarif API</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes prose">
+      <p><strong>Cara membaca Enterprise:</strong> $20 per kursi itu seperti biaya mendaftarkan akun tiap karyawan. Pemakaian AI-nya dibayar terpisah, mirip biaya beban dan biaya pemakaian listrik.</p>
+      <p>Perkiraan Rupiah memakai kurs Rp18.209 per USD (pembukaan pasar 12 November 2026), dibulatkan. Tagihan sebenarnya mengikuti kurs dan pajak saat pembayaran.</p>
+    </div>
+  </section>
+
+  <section id="individual-vs-team" aria-labelledby="h-ivt">
+    <div class="section-head">
+      <h2 id="h-ivt">Individual vs Team, dengan bahasa sederhana</h2>
+      <p class="prose">Kecerdasan Claude sama di semua paket. Bedanya ada pada siapa pemilik akunnya: karyawan atau perusahaan.</p>
+    </div>
+
+    <div class="analogy prose">
+      <p>Bayangkan perbedaan antara <strong>email Gmail pribadi</strong> dan <strong>email kantor</strong>. Gmail pribadi milik Anda sendiri, dan perusahaan tidak bisa mengaturnya. Email kantor dibuatkan dan diatur oleh bagian IT. Paket individual itu seperti Gmail pribadi; paket Team itu seperti email kantor.</p>
+    </div>
+
+    <div class="compare">
+      <article class="card ind">
+        <h3>Paket individual</h3>
+        <ul>
+          <li>Setiap orang membeli dan mengatur akunnya sendiri.</li>
+          <li>Tagihan terpisah per orang, biasanya lewat reimburse.</li>
+          <li>Setiap orang harus ingat mematikan sendiri pengaturan "data boleh dipakai untuk melatih AI".</li>
+          <li>Perusahaan tidak bisa melihat atau mengatur siapa yang memakai Claude.</li>
+        </ul>
+      </article>
+      <article class="card team">
+        <h3>Paket Team</h3>
+        <ul>
+          <li>Perusahaan membuat satu ruang kerja dan mengundang karyawan ke dalamnya.</li>
+          <li><strong>Login pakai akun kantor (SSO).</strong> Karyawan masuk ke Claude dengan akun perusahaan yang sama seperti email kantornya. Satu pintu masuk, diatur oleh IT.</li>
+          <li>Data kerja <strong>tidak dipakai untuk melatih AI</strong>, otomatis untuk semua orang.</li>
+          <li>Satu tagihan, dan admin bisa melihat siapa yang aktif.</li>
+        </ul>
+      </article>
+    </div>
+
+    <h3>Contoh nyata: saat karyawan resign</h3>
+    <div class="story">
+      <article class="card ind">
+        <h3>Dengan akun individual</h3>
+        <ol>
+          <li>Karyawan keluar dari perusahaan.</li>
+          <li>Akun Claude tetap miliknya, karena ia mendaftar sendiri.</li>
+          <li>Riwayat chat, file, dan project kerja ikut terbawa pergi.</li>
+        </ol>
+        <p class="verdict">Perusahaan tidak bisa mencabut aksesnya.</p>
+      </article>
+      <article class="card team">
+        <h3>Dengan Team</h3>
+        <ol>
+          <li>Karyawan keluar dari perusahaan.</li>
+          <li>IT menonaktifkan akun kantornya, atau admin mengeluarkannya dari Team.</li>
+          <li>Karena login lewat akun kantor, ia otomatis tidak bisa masuk ke Claude perusahaan lagi.</li>
+        </ol>
+        <p class="verdict">Akses dicabut dari pusat, tanpa bergantung pada karyawan.</p>
+      </article>
+    </div>
+
+    <div class="notes prose">
+      <p><strong>Satu hal yang sering ditanyakan:</strong> di Team, jatah pemakaian dihitung per orang. Kalau jatah satu orang habis, jatah orang lain tidak berkurang, dan sisa jatah tidak bisa dipindahkan ke orang lain.</p>
+    </div>
+  </section>
+
+  <section id="kenapa-team" aria-labelledby="h-why">
+    <div class="section-head">
+      <h2 id="h-why">Kenapa beli Team, bukan beli akun satu per satu?</h2>
+      <p class="prose">Dengan harga yang hampir sama, Team memberi perusahaan kendali penuh atas akun, data, dan biaya.</p>
+    </div>
+
+    <div class="reasons">
+      <article class="reason">
+        <h3>Data lebih aman</h3>
+        <p>Data kerja tidak dipakai untuk melatih AI secara default. Tidak perlu memastikan tiap karyawan sudah mengubah pengaturannya.</p>
+      </article>
+      <article class="reason">
+        <h3>Akses bisa dicabut</h3>
+        <p>Login lewat akun kantor. Saat karyawan resign atau pindah divisi, IT cukup menonaktifkan aksesnya dari pusat.</p>
+      </article>
+      <article class="reason">
+        <h3>Satu tagihan</h3>
+        <p>Tidak ada lagi reimburse puluhan langganan. Admin bisa memasang batas belanja untuk seluruh tim.</p>
+      </article>
+      <article class="reason">
+        <h3>Terhubung ke data kantor</h3>
+        <p>Claude bisa mencari di Google Drive, Slack, dan Microsoft 365 perusahaan, dan admin menentukan sumber mana yang boleh diakses.</p>
+      </article>
+      <article class="reason">
+        <h3>Kerja lebih seragam</h3>
+        <p>Template laporan dan cara kerja bisa dibagikan ke semua orang lewat skills organisasi, sehingga hasil antar orang konsisten.</p>
+      </article>
+      <article class="reason">
+        <h3>Jatah sesuai kebutuhan</h3>
+        <p>Kursi Standard untuk pengguna biasa, kursi Premium untuk pengguna berat. Anda hanya membayar kapasitas besar untuk yang benar-benar butuh.</p>
+      </article>
+    </div>
+
+    <h3>Perbandingan harga per orang (bayar tahunan)</h3>
+    <div class="table-scroll price-compare" role="region" aria-label="Perbandingan harga individual dan Team" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Pilihan</th>
+            <th scope="col">Harga per orang</th>
+            <th scope="col">Jatah pemakaian</th>
+            <th scope="col">Fitur perusahaan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="plan">Pro</td>
+            <td>$17/bulan</td>
+            <td>1x Pro</td>
+            <td>Tidak ada</td>
+          </tr>
+          <tr>
+            <td class="plan">Team Standard</td>
+            <td>$20/bulan</td>
+            <td>1,25x Pro</td>
+            <td>Ada semua</td>
+          </tr>
+          <tr class="group-start">
+            <td class="plan">Max</td>
+            <td>$100/bulan</td>
+            <td>5x Pro</td>
+            <td>Tidak ada</td>
+          </tr>
+          <tr>
+            <td class="plan">Team Premium</td>
+            <td>$100/bulan</td>
+            <td>6,25x Pro</td>
+            <td>Ada semua</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="prose" style="margin:0">Dengan tambahan sekitar $3 per orang dibanding Pro, Team Standard memberi jatah lebih besar plus semua fitur perusahaan. Dengan harga yang sama seperti Max, Team Premium memberi jatah lebih besar.</p>
+
+    <div class="when prose">
+      <h3>Kapan akun individual tetap masuk akal</h3>
+      <ul>
+        <li>Anda bekerja sendiri, atau memakai Claude untuk keperluan pribadi.</li>
+        <li>Anda butuh Ultra (tanpa batas 5 jam), yang tidak ada versi Team-nya.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="dampak-bi" aria-labelledby="h-bi">
+    <div class="section-head">
+      <h2 id="h-bi">Dampak keuntungan untuk Business Intelligence</h2>
+   </div>
+
+    <div class="table-scroll bi-table" role="region" aria-label="Tabel dampak untuk Business Intelligence" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Kegunaan</th>
+            <th scope="col">Bagaimana Claude membantu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="plan">Brainstorming ide</td>
+            <td><strong class="help">Membantu</strong> mencari ide metrik baru, pertanyaan bisnis yang perlu dijawab</td>
+          </tr>
+          <tr>
+            <td class="plan">Riset kompetitor</td>
+            <td><strong class="help">Membantu</strong> mengumpulkan informasi pasar, harga, dan langkah pesaing dari banyak sumber </td>
+          </tr>
+          <tr>
+            <td class="plan">Membuat program dan aplikasi</td>
+            <td><strong class="help">Membantu</strong> menulis pengguna untuk ngoding dan debugging error code.</td>
+          </tr>
+          <tr>
+            <td class="plan">Analisis menyeluruh</td>
+            <td><strong class="help">Membantu</strong> menelusuri kenapa penjualan turun, membandingkan skenario, </td>
+          </tr>
+          <tr>
+            <td class="plan">Perbaikan data</td>
+            <td><strong class="help">Membantu</strong> merapikan data berantakan seperti duplikat, format tanggal berbeda, salah ketik, dan kolom kosong, serta membuat skrip pengecekan agar kesalahan tidak terulang.</td>
+          </tr>
+          <tr>
+            <td class="plan">Dashboard dan laporan rutin</td>
+            <td><strong class="help">Membantu</strong> membuat dashboard KPI dan laporan mingguan yang bisa dijadwalkan berjalan otomatis.</td>
+          </tr>
+          <tr>
+            <td class="plan">Insight dari data kantor</td>
+            <td><strong class="help">Membantu</strong> menggabungkan informasi dari Google Drive, Slack, dan Microsoft 365 perusahaan tanpa perlu mengunggah file satu per satu.</td>
+          </tr>
+          <tr>
+            <td class="plan">Standar yang seragam</td>
+            <td><strong class="help">Membantu</strong> membagikan definisi metrik dan template laporan ke seluruh tim, sehingga angka yang dilaporkan tiap orang konsisten.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="analogy prose">
+      <h3 style="margin-bottom:8px">Bedanya dengan AI pada umumnya</h3>
+      <p>Untuk tugas sehari-hari, Claude bekerja seperti asisten AI lain, seperti gpt atau gemini. Nilai tambah berlangganan paling terasa pada pekerjaan yang menuntut <strong>logika bertahap</strong>: menyusun code yang rumit atau menulis dan memperbaiki kode untuk membangun suatu sistem.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    
+    <ul>
+      <li><a href="https://www.claude.com/pricing">Claude pricing</a></li>
+      <li><a href="https://support.claude.com/en/articles/9266767-what-is-the-team-plan">What is the Team plan? — Claude Help Center</a></li>
+      <li><a href="https://support.claude.com/en/articles/11049741-about-claude-s-max-plan-usage">About Claude's Max plan usage — Claude Help Center</a></li>
+      <li><a href="https://investor.id/market/461649/nilai-tukar-rupiah-hari-ini-kamis-12-november-2026-ambrol-ke-rp-18200">Kurs rupiah 12 November 2026 — investor.id</a></li>
+    </ul>
+    <span>Harga dan batas pemakaian dapat berubah sewaktu-waktu. Cek harga untuk wilayah di claude.ai/upgrade.</span>
+  </div>
+</footer>
+
+</body>
+</html>
