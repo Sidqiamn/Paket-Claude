@@ -132,6 +132,9 @@ tr.group-start td { border-top: 2px solid var(--line); }
 .bi-table table { min-width: 560px; }
 .help { color: var(--team); }
 .bi-table td.plan { white-space: normal; min-width: 170px; }
+.duo { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.kpi { order: 2; display: grid; gap: 12px; border-left: 4px solid var(--accent); padding: 4px 0 4px 20px; }
+.kpi ol { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
 .opini { display: grid; gap: 12px; border-left: 4px solid var(--team); padding: 4px 0 4px 20px; }
 .opini ol, .opini ul { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
 .opini h3 + ol, .opini h3 + ul { margin-top: -2px; }
@@ -145,7 +148,7 @@ footer .wrap { padding-top: 24px; padding-bottom: 32px; font-size: 14.5px; color
 footer ul { margin: 0; padding-left: 20px; }
 
 @media (max-width: 640px) {
-  .compare, .story, .reasons { grid-template-columns: 1fr; }
+  .compare, .story, .reasons, .duo { grid-template-columns: 1fr; }
   body { font-size: 16px; }
 }
 </style>
@@ -403,7 +406,17 @@ footer ul { margin: 0; padding-left: 20px; }
       </table>
     </div>
 
-    <div class="opini prose">
+    <div class="duo">
+    <div class="kpi">
+      <h3>Yang bisa dilakukan Claude untuk pencapaian KPI Business Intelligence dan data</h3>
+      <ol>
+        <li><strong>Menulis dan mengecek query SQL di Metabase.</strong> Membantu menyusun query untuk setiap grafik di dashboard marketing, lalu mengecek kesalahan umum seperti angka yang berlipat karena <em>join</em>, filter tanggal yang keliru, atau data ganda, supaya angka di dashboard bisa dipercaya.</li>
+        <li><strong>Membantu analisis campaign.</strong> Membandingkan hasil campaign antar segmen dan periode, mencari campaign yang paling efektif, dan memberi masukan untuk segmentasi, targeting, serta optimasi campaign berikutnya.</li>
+        <li><strong>Membantu membuat sistem pembersihan data di database ELITE.</strong> Menyusun aturan dan skrip untuk mendeteksi data duplikat, format yang tidak seragam, data kosong, dan pembersihan lainnya sehingga integrasi data revenue stream marketing lebih rapi dan kualitas data tetap terjaga.</li>
+        <li><strong>Membantu membangun teknologi AI untuk analisis.</strong> Misalnya forecasting penjualan atau revenue, serta analisis customer seperti cluster CRM dengan metode RFM (Recency, Frequency, Monetary), untuk mendukung analisis dan optimasi performa marketing.</li>
+      </ol>
+    </div>
+    <div class="opini">
       <h3>Keunggulan Claude dibandingkan AI lain, berdasarkan opini publik dan pengalaman pribadi</h3>
       <ol>
         <li><strong>Kuat dalam pengembangan kode (coding).</strong> Claude bisa menguji, mengevaluasi, dan memperbaiki kesalahan kodenya sendiri sebelum hasilnya diberikan ke pengguna. Proses pengembangan proyek jadi lebih terarah dan efisien.</li>
@@ -417,6 +430,7 @@ footer ul { margin: 0; padding-left: 20px; }
         <li><strong>Kalkulator Atap Shingles BGP</strong>, aplikasi web yang dikembangkan dengan bantuan Claude: <a href="https://kalkulator-atap-shingles-bgp.vercel.app/">kalkulator-atap-shingles-bgp.vercel.app</a></li>
         <li><strong>Dashboard Metabase untuk tim marketing</strong>, dibuat dengan bantuan Claude dan ChatGPT.</li>
       </ul>
+    </div>
     </div>
 
     <div class="analogy prose">
