@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Memilih Paket Claude</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -123,7 +124,7 @@ tr.group-start td { border-top: 2px solid var(--line); }
   margin-top: 0;
 }
 /* Alasan memilih Team */
-.reasons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; counter-reset: r; }
+.reasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; counter-reset: r; }
 .reason { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 8px; align-content: start; }
 .reason h3::before { counter-increment: r; content: counter(r) ". "; color: var(--team); }
 .reason p { margin: 0; color: var(--ink); }
@@ -131,6 +132,10 @@ tr.group-start td { border-top: 2px solid var(--line); }
 .bi-table table { min-width: 560px; }
 .help { color: var(--team); }
 .bi-table td.plan { white-space: normal; min-width: 170px; }
+.opini { display: grid; gap: 12px; border-left: 4px solid var(--team); padding: 4px 0 4px 20px; }
+.opini ol, .opini ul { margin: 0; padding-left: 22px; display: grid; gap: 10px; }
+.opini h3 + ol, .opini h3 + ul { margin-top: -2px; }
+.opini ul { margin-bottom: 0; }
 .when { background: var(--warn-soft); border-radius: 12px; padding: 18px 22px; display: grid; gap: 8px; }
 .when ul { margin: 0; padding-left: 20px; }
 .when h3 { color: var(--warn); }
@@ -139,9 +144,6 @@ footer { border-top: 1px solid var(--line); background: var(--surface); }
 footer .wrap { padding-top: 24px; padding-bottom: 32px; font-size: 14.5px; color: var(--muted); display: grid; gap: 8px; }
 footer ul { margin: 0; padding-left: 20px; }
 
-@media (max-width: 860px) {
-  .reasons { grid-template-columns: 1fr 1fr; }
-}
 @media (max-width: 640px) {
   .compare, .story, .reasons { grid-template-columns: 1fr; }
   body { font-size: 16px; }
@@ -295,7 +297,6 @@ footer ul { margin: 0; padding-left: 20px; }
     </div>
 
     <div class="reasons">
-      
       <article class="reason">
         <h3>Akses bisa dicabut</h3>
         <p>Login lewat akun kantor. Saat karyawan resign atau pindah divisi, IT cukup menonaktifkan aksesnya dari pusat.</p>
@@ -304,7 +305,6 @@ footer ul { margin: 0; padding-left: 20px; }
         <h3>Satu tagihan</h3>
         <p>Tidak ada lagi reimburse puluhan langganan. Admin bisa memasang batas belanja untuk seluruh tim.</p>
       </article>
-    
       <article class="reason">
         <h3>Kerja lebih seragam</h3>
         <p>Template laporan dan cara kerja bisa dibagikan ke semua orang lewat skills organisasi, sehingga hasil antar orang konsisten.</p>
@@ -368,7 +368,7 @@ footer ul { margin: 0; padding-left: 20px; }
   <section id="dampak-bi" aria-labelledby="h-bi">
     <div class="section-head">
       <h2 id="h-bi">Dampak keuntungan untuk Business Intelligence</h2>
-   </div>
+    </div>
 
     <div class="table-scroll bi-table" role="region" aria-label="Tabel dampak untuk Business Intelligence" tabindex="0">
       <table>
@@ -381,33 +381,47 @@ footer ul { margin: 0; padding-left: 20px; }
         <tbody>
           <tr>
             <td class="plan">Brainstorming ide</td>
-            <td><strong class="help">Membantu</strong> mencari ide metrik baru, pertanyaan bisnis yang perlu dijawab</td>
+            <td><strong class="help">Membantu</strong> mencari ide metrik baru dan pertanyaan bisnis yang perlu dijawab.</td>
           </tr>
           <tr>
             <td class="plan">Riset kompetitor</td>
-            <td><strong class="help">Membantu</strong> mengumpulkan informasi pasar, harga, dan langkah pesaing dari banyak sumber </td>
+            <td><strong class="help">Membantu</strong> mengumpulkan informasi pasar, harga, dan langkah pesaing dari banyak sumber.</td>
           </tr>
           <tr>
             <td class="plan">Membuat program dan aplikasi</td>
-            <td><strong class="help">Membantu</strong> menulis pengguna untuk ngoding dan debugging error code.</td>
+            <td><strong class="help">Membantu</strong> menulis query SQL dan skrip Python.</td>
           </tr>
           <tr>
             <td class="plan">Analisis menyeluruh</td>
-            <td><strong class="help">Membantu</strong> menelusuri kenapa penjualan turun, membandingkan skenario, </td>
+            <td><strong class="help">Membantu</strong> menelusuri kenapa penjualan turun dan membandingkan skenario.</td>
           </tr>
           <tr>
             <td class="plan">Perbaikan data</td>
-            <td><strong class="help">Membantu</strong> merapikan data berantakan</td>
+            <td><strong class="help">Membantu</strong> pengguna agar data lebih berkualitas.</td>
           </tr>
-      
-    
         </tbody>
       </table>
     </div>
 
+    <div class="opini prose">
+      <h3>Keunggulan Claude dibandingkan AI lain, berdasarkan opini publik dan pengalaman pribadi</h3>
+      <ol>
+        <li><strong>Kuat dalam pengembangan kode (coding).</strong> Claude bisa menguji, mengevaluasi, dan memperbaiki kesalahan kodenya sendiri sebelum hasilnya diberikan ke pengguna. Proses pengembangan proyek jadi lebih terarah dan efisien.</li>
+        <li><strong>Unggul untuk masalah yang butuh logika.</strong> ChatGPT memang punya fitur yang lebih beragam, tetapi untuk proyek yang menuntut logika, analisis mendalam, dan pemecahan masalah, Claude terasa lebih unggul dalam beberapa pengalaman penggunaan.</li>
+        <li><strong>Mampu menjaga konteks percakapan.</strong> Pada proyek dengan banyak tahapan dan instruksi yang saling berkaitan, pengguna bisa melanjutkan pekerjaan tanpa harus berulang kali menjelaskan ulang kebutuhan proyek.</li>
+        <li><strong>Konsisten mengikuti instruksi.</strong> Saat pengguna menetapkan aturan, batasan, atau ruang lingkup pekerjaan, Claude relatif mampu menjaga pembahasan agar tidak menyimpang dari tujuan awal.</li>
+      </ol>
+
+      <h3>Contoh implementasi proyek</h3>
+      <ul>
+        <li><strong>Kalkulator Atap Shingles BGP</strong>, aplikasi web yang dikembangkan dengan bantuan Claude: <a href="https://kalkulator-atap-shingles-bgp.vercel.app/">kalkulator-atap-shingles-bgp.vercel.app</a></li>
+        <li><strong>Dashboard Metabase untuk tim marketing</strong>, dibuat dengan bantuan Claude dan ChatGPT.</li>
+      </ul>
+    </div>
+
     <div class="analogy prose">
       <h3 style="margin-bottom:8px">Bedanya dengan AI pada umumnya</h3>
-      <p>Untuk tugas sehari-hari, Claude bekerja seperti asisten AI lain, seperti gpt atau gemini. Nilai tambah berlangganan paling terasa pada pekerjaan yang menuntut <strong>logika bertahap</strong>: menyusun code yang rumit atau menulis dan memperbaiki kode untuk membangun suatu sistem.</p>
+      <p>Untuk tugas sehari-hari, Claude bekerja seperti asisten AI lain, seperti GPT atau Gemini. Nilai tambah berlangganan paling terasa pada pekerjaan yang menuntut <strong>logika bertahap</strong>: menyusun kode yang rumit, atau menulis dan memperbaiki kode untuk membangun suatu sistem.</p>
     </div>
   </section>
 
@@ -415,14 +429,13 @@ footer ul { margin: 0; padding-left: 20px; }
 
 <footer>
   <div class="wrap">
-    
     <ul>
       <li><a href="https://www.claude.com/pricing">Claude pricing</a></li>
       <li><a href="https://support.claude.com/en/articles/9266767-what-is-the-team-plan">What is the Team plan? — Claude Help Center</a></li>
       <li><a href="https://support.claude.com/en/articles/11049741-about-claude-s-max-plan-usage">About Claude's Max plan usage — Claude Help Center</a></li>
       <li><a href="https://investor.id/market/461649/nilai-tukar-rupiah-hari-ini-kamis-12-november-2026-ambrol-ke-rp-18200">Kurs rupiah 12 November 2026 — investor.id</a></li>
     </ul>
-    <span>Harga dan batas pemakaian dapat berubah sewaktu-waktu. Cek harga untuk wilayah di claude.ai/upgrade.</span>
+    <span>Harga dan batas pemakaian dapat berubah sewaktu-waktu. Cek harga untuk wilayah Anda di claude.ai/upgrade.</span>
   </div>
 </footer>
 
